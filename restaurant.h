@@ -35,9 +35,9 @@ public:
         if (!verified)
         {
             string username, password;
-            cout << "Enter Chef Username: ";
+            cout << "Enter Manager Username: ";
             cin >> username;
-            cout << "Enter Chef Password: ";
+            cout << "Enter Manager Password: ";
             cin >> password;
 
             if (!verifyCredentials(username, password))
