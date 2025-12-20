@@ -20,7 +20,13 @@ public:
 
     bool login(int ID)
     {
-        current = r_arr->getResByID(ID);
+        current = new Res_Node;
+        Res_Node* temp = r_arr->getResByID(ID);
+
+        current->id = temp->id;
+        current->name = temp->name;
+        current->loc_id = temp->loc_id;
+        current->rating = temp->rating;
 
         if (!current)
         {
@@ -29,19 +35,13 @@ public:
         }
 
         current_menu = new Menus(current->name);
-
         return true;
     }
 
     bool signup(int ID, string username, int location_code, float rating)
     {
-        Res_Node new_res;
-        new_res.id = ID;
-        new_res.name = username;
-        new_res.loc_id = location_code;
-        new_res.rating = rating;
-        r_arr->add_res(new_res);
-        current = &new_res;
+        current = new Res_Node{ID, username, rating, location_code};
+        r_arr->add_res(*current);
         current_menu = new Menus(username);
         return true;
     }
@@ -58,6 +58,7 @@ public:
             cout << "Enter your choice: ";
             int choice;
             cin >> choice;
+            cout << endl;
             switch (choice)
             {
             case 1:
@@ -68,7 +69,7 @@ public:
                 verified = login(res_id);
                 if (verified)
                 {
-                    cout << "Login successful!\n";
+                    cout << "\nLogin successful!\n";
                 }
                 break;
             }
@@ -90,7 +91,7 @@ public:
                 verified = signup(res_id, res_name, loc_code, rating);
                 if (verified)
                 {
-                    cout << "Signup successful! You are now logged in.\n";
+                    cout << "\nSignup successful! You are now logged in.\n";
                 }
             }
             break;
@@ -107,13 +108,14 @@ public:
 
         while (true)
         {
-            cout << "\n=====" << current->name << "=====\n";
+            cout << "\n===== " << current->name << " =====\n";
             cout << "1. View Menu\n";
             cout << "2. Add Menu Item\n";
             cout << "3. Logout\n";
             cout << "Enter your choice: ";
             int choice;
             cin >> choice;
+            cout << "\n";
             switch (choice)
             {
             case 1:
@@ -125,6 +127,8 @@ public:
             case 2:
             {
                 Item_Node new_item;
+                cout << "Enter Item Serial Number: ";
+                cin >> new_item.sr_no;
                 cout << "Enter Item Name: ";
                 cin >> new_item.name;
                 cout << "Enter Item Price: ";
@@ -145,6 +149,7 @@ public:
     ~RestaurantWindow()
     {
         delete current_menu;
+        delete current;
     }
 };
 

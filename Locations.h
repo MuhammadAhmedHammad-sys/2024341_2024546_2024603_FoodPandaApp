@@ -12,8 +12,8 @@ using namespace std;
 class LocationGraph
 {
 private:
-    map<int, string> locations;  // Map of location code to Location
-    map<int, list<int>> adjList; // Adjacency list for the graph
+    map<int, string> locations;  // Map of location code to location name
+    map<int, list<int>> adjMap; // Adjacency map for the graph
     string locationFile;
     string edgeFile;
 
@@ -38,7 +38,7 @@ public:
         int from, to;
         while (edgeFileHandle >> from >> to)
         {
-            adjList[from].push_back(to);
+            adjMap[from].push_back(to);
         }
     }
 
@@ -54,9 +54,9 @@ public:
 
     void addEdge(int from, int to, bool directed = false)
     {
-        adjList[from].push_back(to);
+        adjMap[from].push_back(to);
         if (!directed)
-            adjList[to].push_back(from); // Assuming undirected graph
+            adjMap[to].push_back(from); // Assuming undirected graph
     }
 
     void saveToFile()
@@ -71,7 +71,7 @@ public:
 
         // Save edges to file
         ofstream edgeFileHandle(edgeFile);
-        for (const auto &pair : adjList)
+        for (const auto &pair : adjMap)
         {
             int from = pair.first;
             for (int to : pair.second)
@@ -84,7 +84,7 @@ public:
 
     void printGraph()
     {
-        for (const auto &pair : adjList)
+        for (const auto &pair : adjMap)
         {
             cout << "Location " << pair.first << " (" << locations[pair.first] << "): ";
             for (int neighbor : pair.second)
@@ -114,7 +114,7 @@ public:
             if (current == end)
                 break;
 
-            for (int neighbor : adjList[current])
+            for (int neighbor : adjMap[current])
             {
                 if (!visited[neighbor])
                 {

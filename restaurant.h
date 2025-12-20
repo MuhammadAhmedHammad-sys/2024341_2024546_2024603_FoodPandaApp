@@ -129,9 +129,9 @@ public:
         cout << "===== ALL AVAILABLE RESTAURANTS =====" << endl;
         for (int i = 0; i < res_count; i++)
         {
-            cout << res_arr[i].id << " ";
-            cout << res_arr[i].name << " ";
-            cout << res_arr[i].rating << " ";
+            cout <<"ID: "<< res_arr[i].id << " | ";
+            cout <<"Name: "<< res_arr[i].name << " | ";
+            cout <<"Rating: "<< res_arr[i].rating << " ";
             cout << endl;
         }
     }

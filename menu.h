@@ -265,7 +265,7 @@ public:
         ifstream file(filename);
         Item_Node temp;
         string sr_no, price;
-        while (getline(file, sr_no) && getline(file, price) && getline(file, temp.name))
+        while (getline(file, sr_no) && getline(file, temp.name) && getline(file, price))
         {
             temp.sr_no = stoi(sr_no);
             temp.price = stoi(price);
@@ -278,6 +278,7 @@ public:
         if (p)
         {
             writeToFile(p->lchild, file);
+            file << p->sr_no << endl;
             file << p->name << endl;
             file << p->price << endl;
             writeToFile(p->rchild, file);
@@ -313,7 +314,7 @@ public:
         if (p)
         {
             inorder(p->lchild);
-            cout << p->sr_no << ". " << p->name << " - " << p->price << "\n";
+            cout << "\t#"<<p->sr_no << ". " << p->name << " - Rs. " << p->price << "\n";
             inorder(p->rchild);
         }
     }
@@ -322,7 +323,7 @@ public:
     {
         if(!root)
         {
-            cout << "Menu is empty.\n";
+            cout << "\tMenu is empty.\n";
             return;
         }
         inorder(root);

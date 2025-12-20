@@ -1,4 +1,6 @@
-4  Suburb
-4  Suburb
-2  Uptown
-2  Uptown
+1 Islamabad
+2 Uptown
+3 Bedroom
+4 Suburb
+5 Island
+6 Downtown
