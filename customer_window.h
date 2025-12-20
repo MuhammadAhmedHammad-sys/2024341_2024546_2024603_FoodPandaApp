@@ -8,6 +8,7 @@ using namespace std;
 #include "restaurant.h"
 #include "customer.h"
 #include "menu.h"
+#include "Locations.h"
 
 class CustomerWindow
 {
@@ -15,9 +16,10 @@ private:
     CustomerHashTable *c_hash;
     Restaurants *r_arr;
     CurrentCustomer *user;
+    LocationGraph loc_list;
 
 public:
-    CustomerWindow(CustomerHashTable *c, Restaurants *r) : c_hash(c), r_arr(r), user(new CurrentCustomer(c)) {};
+    CustomerWindow(CustomerHashTable *c, Restaurants *r) : c_hash(c), r_arr(r), user(new CurrentCustomer(c)), loc_list() {};
 
     void menu() 
     {
@@ -92,6 +94,27 @@ public:
                 cout<<"Invalid choice!\n";
         }
     };
+    
+    void displayRestaurants()
+    {
+        cout<<"By Location or By Price? (L/P): ";
+        char choice;
+        cin>>choice;
+        if(choice == 'L' || choice == 'l')
+        {
+            //r_arr->sort('l');
+            r_arr->display();
+        }
+        else if(choice == 'P' || choice == 'p')
+        {
+            //r_arr->sort('p');
+            r_arr->display();
+        }
+        else
+        {
+            cout<<"Invalid choice!\n";
+        }
+    }
 
     void openRestaurant(int res_id)
     {
@@ -141,6 +164,8 @@ public:
                 cout<<item_id<<" added to order. Current total: "<<total_price<<"\n";
             }
         }
+        cout<<"Calculating delivery path...\n\t";
+        loc_list.displayPath(loc_list.findPath(r_arr->getLocID(res_id), user->getLocID()));
         user->addOrder(res_id, total_price);
         cout<<"Order placed! Total price: "<<total_price<<"\n";
     }

@@ -115,6 +115,30 @@ public:
         }
     }
 
+    string getResName(int res_id)
+    {
+        for (int i = 0; i < res_count; i++)
+        {
+            if (res_arr[i].id == res_id)
+            {
+                return res_arr[i].name;
+            }
+        }
+        return "";
+    }
+
+    int getLocID(int res_id)
+    {
+        for (int i = 0; i < res_count; i++)
+        {
+            if (res_arr[i].id == res_id)
+            {
+                return res_arr[i].loc_id;
+            }
+        }
+        return -1; // not found
+    }
+
     void display()
     {
         cout << "===== ALL AVAILABLE RESTAURANTS =====" << endl;
