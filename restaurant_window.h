@@ -50,6 +50,7 @@ public:
         cout << "\n===== Restaurant Manager Menu =====\n";
         cout << "1. Login\n";
         cout << "2. Signup\n";
+        cout << "Enter your choice: ";
         int choice;
         cin >> choice;
         switch (choice)
@@ -89,36 +90,39 @@ public:
             cout << "Invalid choice!\n";
         }
 
-        cout << "\n===== Options =====\n";
-        cout << "1. View Menu\n";
-        cout << "2. Add Menu Item\n";
-        cout << "3. Logout\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
-        switch (choice)
+        while (true)
         {
-        case 1:
-        {
-            cout << "Displaying menu for " << current->name << "\n";
-            current_menu->displayItems();
-            break;
-        }
-        case 2:
-        {
-            Item_Node new_item;
-            cout << "Enter Item Name: ";
-            cin >> new_item.name;
-            cout << "Enter Item Price: ";
-            cin >> new_item.price;
-            current_menu->insertItem(new_item);
-            cout << "Item added successfully!\n";
-            break;
-        }
-        case 3:
-            cout << "Logging out...\n";
-            break;
-        default:
-            cout << "Invalid choice!\n";
+            cout << "\n===== Options =====\n";
+            cout << "1. View Menu\n";
+            cout << "2. Add Menu Item\n";
+            cout << "3. Logout\n";
+            cout << "Enter your choice: ";
+            cin >> choice;
+            switch (choice)
+            {
+            case 1:
+            {
+                cout << "Displaying menu for " << current->name << "\n";
+                current_menu->displayItems();
+                break;
+            }
+            case 2:
+            {
+                Item_Node new_item;
+                cout << "Enter Item Name: ";
+                cin >> new_item.name;
+                cout << "Enter Item Price: ";
+                cin >> new_item.price;
+                current_menu->insertItem(new_item);
+                cout << "Item added successfully!\n";
+                break;
+            }
+            case 3:
+                cout << "Logging out...\n";
+                break;
+            default:
+                cout << "Invalid choice!\n";
+            }
         }
     }
 

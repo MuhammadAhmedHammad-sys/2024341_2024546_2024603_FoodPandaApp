@@ -320,6 +320,11 @@ public:
 
     void displayItems()
     {
+        if(!root)
+        {
+            cout << "Menu is empty.\n";
+            return;
+        }
         inorder(root);
         cout << endl;
     }
