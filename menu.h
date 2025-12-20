@@ -261,7 +261,7 @@ public:
 
     void loadMenu()
     {
-        string filename = "menus" + res_name + "_menu.txt";
+        string filename = fileName(res_name);
         ifstream file(filename);
         Item_Node temp;
         string sr_no, price;
@@ -284,9 +284,14 @@ public:
         }
     }
 
+    string fileName(string res_name)
+    {
+        return "menus/" + res_name + "_menu.txt";
+    }
+
     bool saveToFile()
     {
-        string filename = "menus/" + res_name + "_menu.txt";
+        string filename = fileName(res_name);
         ofstream file(filename, ios::trunc);
         if (!file.is_open())
         {
