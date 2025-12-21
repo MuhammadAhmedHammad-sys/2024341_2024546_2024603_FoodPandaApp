@@ -4,3 +4,4 @@
 4 Suburb
 5 Island
 6 Downtown
+7 Bordeaux

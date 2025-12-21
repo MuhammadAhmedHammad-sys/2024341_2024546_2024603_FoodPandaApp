@@ -16,10 +16,10 @@ private:
     CustomerHashTable *c_hash;
     Restaurants *r_arr;
     CurrentCustomer *user;
-    LocationGraph loc_list;
+    LocationGraph *loc_list;
 
 public:
-    CustomerWindow(CustomerHashTable *c, Restaurants *r) : c_hash(c), r_arr(r), user(new CurrentCustomer(c)), loc_list() {};
+    CustomerWindow(CustomerHashTable *c, Restaurants *r, LocationGraph *l) : c_hash(c), r_arr(r), loc_list(l), user(new CurrentCustomer(c)) {};
 
     void menu()
     {
@@ -166,7 +166,7 @@ public:
             }
         }
         cout << "\nCalculating delivery path...\n\t";
-        loc_list.displayPath(loc_list.findPath(r_arr->getResByID(res_id)->loc_id, user->getLocID()));
+        loc_list->displayPath(loc_list->findPath(r_arr->getResByID(res_id)->loc_id, user->getLocID()));
         user->addOrder(res_id, total_price);
         cout << "\nOrder placed! Total price: " << total_price << "\n\n";
         user->saveToFile();
